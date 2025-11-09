@@ -1,4 +1,6 @@
 const fs = require("fs");
+const crypto = require("crypto");
+const start = Date.now();
 
 setTimeout(() => console.log("Timer 1 finished"), 0);
 setTimeout(() => console.log("immediate 1 finished"));
@@ -11,18 +13,10 @@ fs.readFile("testfile.txt", () => {
   setTimeout(() => console.log("immediate 2 finished"));
 
   process.nextTick(() => console.log("Process.nexTick"));
+
+  crypto.pbkdf2("password", "salt", 100000, 1024, "sha512", () => {
+    console.log(Date.now() - start, "Password encrypted");
+  });
 });
 
 console.log("hello  from the top-level code ");
-
-// PS C:\Users\DELL\Downloads\event-loop-practice> node .\eventloop.js
-// hello  from the top-level code
-// Timer 1 finished
-// immediate 1 finished
-// I/O finished
-// -------------
-// Process.nexTick
-// Timer 2 finished
-// immediate 2 finished
-// Timer 3 finished
-// PS C:\Users\DELL\Downloads\event-loop-practice>
