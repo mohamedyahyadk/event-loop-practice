@@ -9,6 +9,8 @@ fs.readFile("testfile.txt", () => {
   setTimeout(() => console.log("Timer 2 finished"), 0);
   setTimeout(() => console.log("Timer 3 finished"), 3000);
   setTimeout(() => console.log("immediate 2 finished"));
+
+  process.nextTick(() => console.log("Process.nexTick"));
 });
 
 console.log("hello  from the top-level code ");
@@ -19,9 +21,8 @@ console.log("hello  from the top-level code ");
 // immediate 1 finished
 // I/O finished
 // -------------
+// Process.nexTick
 // Timer 2 finished
 // immediate 2 finished
 // Timer 3 finished
 // PS C:\Users\DELL\Downloads\event-loop-practice>
-
-// //
